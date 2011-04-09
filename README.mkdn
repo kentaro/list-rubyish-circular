@@ -5,8 +5,8 @@ List::Rubyish
 
 # SYNOPSIS
 
-  use List::Rubyish::Circular;
   use Test::More;
+  use List::Rubyish::Circular;
 
   my $list = List::Rubyish::Circular->new(qw(jkondo reikon cinnamon));
 
