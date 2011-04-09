@@ -2,20 +2,23 @@ use inc::Module::Install;
 use Module::Install::AuthorTests;
 use Module::Install::ReadmeMarkdownFromPod;
 
-name 'List-Rubyish-Circular';
+name     'List-Rubyish-Circular';
 all_from 'lib/List/Rubyish/Circular.pm';
+name     'List-Rubyish-Circular';
+author   'Kentaro Kuribayashi, <kentarok@cpan.org>';
+license  'MIT';
+
 readme_markdown_from 'lib/List/Rubyish/Circular.pm';
 
-# requires '';
-# requires 'Exporter' => 5.63; # use Exporter 'import';
-# requires 'Plack' =>  0.9949;
-
-
+requires 'List::Rubyish';
 
 tests 't/*.t t/*/*.t t/*/*/*.t t/*/*/*/*.t';
 test_requires 'Test::More' => 0.96; # done_testing, subtest
-# test_requires 'Test::Requires';
+
 author_tests('xt');
-# test_requires 'YAML'; # required for use_test_base.
-# use_test_base;
+auto_include_deps;
+
+repository 'http://github.com/kentaro/list-rubyish-circular';
+bugtracker 'http://github.com/kentaro/list-rubyish-circular/issues';
+
 WriteAll;
