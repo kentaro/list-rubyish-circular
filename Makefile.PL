@@ -10,7 +10,10 @@ license  'MIT';
 
 readme_markdown_from 'lib/List/Rubyish/Circular.pm';
 
-requires 'List::Rubyish';
+requires qw(
+    parent
+    List::Rubyish
+);
 
 tests 't/*.t t/*/*.t t/*/*/*.t t/*/*/*/*.t';
 test_requires 'Test::More' => 0.96; # done_testing, subtest

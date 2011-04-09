@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use parent qw(List::Rubyish);
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 sub cycle {
     my ($self, $count) = @_;
