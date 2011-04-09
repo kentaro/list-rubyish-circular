@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use parent qw(List::Rubyish);
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 sub cycle {
     my ($self, $count) = @_;
@@ -45,8 +45,8 @@ List::Rubyish
   is_deeply [qw(reikon cinnamon jkondo)], $list->cycle->to_a;
   is_deeply [qw(cinnamon jkondo reikon)], $list->cycle(2)->to_a;
 
-  is_deeply [qw(reikon cinnamon jkondo)], $list->rcycle->to_a;
-  is_deeply [qw(cinnamon jkondo reikon)], $list->rcycle(2)->to_a;
+  is_deeply [qw(cinnamon jkondo reikon)], $list->rcycle->to_a;
+  is_deeply [qw(reikon cinnamon jkondo)], $list->rcycle(2)->to_a;
 
   # $list is still a circular list after destracive operation
   $list->push(qw(tokky));
@@ -67,7 +67,7 @@ List::Rubyish against a circular list.
 
 =over 4
 
-Shifts list to the left and returns new list according to
+Shifts list to the left according to C<$count> and returns new list
 C<$count>. If $count not passed in, its value is 1.
 
   my $list = List::Rubyish::Circular->new(qw(jkondo reikon cinnamon));
