@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use parent qw(List::Rubyish);
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 sub cycle {
     my ($self, $count) = @_;
@@ -15,7 +15,8 @@ sub cycle {
         push @list, $self->[$index % $self->size];
     }
 
-    $self->new(@list);
+    @{$self} = @list;
+    $self;
 }
 
 sub rcycle {
@@ -42,18 +43,18 @@ List::Rubyish
 
   my $list = List::Rubyish::Circular->new(qw(jkondo reikon cinnamon));
 
-  is_deeply [qw(reikon cinnamon jkondo)], $list->cycle->to_a;
-  is_deeply [qw(cinnamon jkondo reikon)], $list->cycle(2)->to_a;
+  is_deeply, $list->cycle->to_a,     [qw(reikon cinnamon jkondo)];
+  is_deeply, $list->cycle(2)->to_a,  [qw(jkondo reikon cinnamon)];
 
-  is_deeply [qw(cinnamon jkondo reikon)], $list->rcycle->to_a;
-  is_deeply [qw(reikon cinnamon jkondo)], $list->rcycle(2)->to_a;
+  is_deeply, $list->rcycle->to_a,    [qw(cinnamon jkondo reikon)];
+  is_deeply, $list->rcycle(2)->to_a, [qw(jkondo reikon cinnamon)];
 
   # $list is still a circular list after destracive operation
   $list->push(qw(tokky));
 
-  is_deeply [qw(jkondo reikon cinnamon tokky)], $list->to_a;
-  is_deeply [qw(reikon cinnamon tokky jkondo)], $list->cycle->to_a;
-  is_deeply [qw(cinnamon tokky jkondo reikon)], $list->rcycle(2)->to_a;
+  is_deeply, $list->to_a,            [qw(jkondo reikon cinnamon tokky)];
+  is_deeply, $list->cycle->to_a,     [qw(reikon cinnamon tokky jkondo)];
+  is_deeply, $list->rcycle(2)->to_a, [qw(tokky jkondo reikon cinnamon)];
 
 =head1 DESCRIPTION
 
@@ -67,13 +68,13 @@ List::Rubyish against a circular list.
 
 =over 4
 
-Shifts list to the left according to C<$count> and returns new list
-C<$count>. If $count not passed in, its value is 1.
+Shifts list to the left according to C<$count>. If $count not passed
+in, its value is 1. This operation is destructive.
 
   my $list = List::Rubyish::Circular->new(qw(jkondo reikon cinnamon));
 
-  is_deeply [qw(reikon cinnamon jkondo)], $list->cycle->to_a;
-  is_deeply [qw(cinnamon jkondo reikon)], $list->cycle(2)->to_a;
+  is_deeply, $list->cycle->to_a,    [qw(reikon cinnamon jkondo)];
+  is_deeply, $list->cycle(2)->to_a, [qw(jkondo reikon cinnamon)];
 
 =back
 
